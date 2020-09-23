@@ -8,11 +8,9 @@ def Dice3d(a, b):
     This will compute the Dice Similarity coefficient for two 3-dimensional volumes
     Volumes are expected to be of the same size. We are expecting binary masks -
     0's are treated as background and anything else is counted as data
-
     Arguments:
         a {Numpy array} -- 3D array with first volume
         b {Numpy array} -- 3D array with second volume
-
     Returns:
         float
     """
@@ -22,17 +20,11 @@ def Dice3d(a, b):
     if a.shape != b.shape:
         raise Exception(f"Expecting inputs of the same shape, got {a.shape} and {b.shape}")
 
-    # TASK: Write implementation of Dice3D. If you completed exercises in the lessons
-    # you should already have it.
-    # <YOUR CODE HERE>
-    
-    a = (a > 0.1)
-    b = (b > 0.1)
-    intersection = np.sum(a*b) 
-    volumes = np.sum(a) + np.sum(b)
+    intersection = np.sum((a>0) * (b>0))
+    volumes = np.sum(a>0) + np.sum(b>0)
 
     if volumes == 0:
-        return 0
+        return -1
 
     return 2.*float(intersection) / float(volumes)
 
@@ -41,11 +33,9 @@ def Jaccard3d(a, b):
     This will compute the Jaccard Similarity coefficient for two 3-dimensional volumes
     Volumes are expected to be of the same size. We are expecting binary masks - 
     0's are treated as background and anything else is counted as data
-
     Arguments:
         a {Numpy array} -- 3D array with first volume
         b {Numpy array} -- 3D array with second volume
-
     Returns:
         float
     """
@@ -54,16 +44,11 @@ def Jaccard3d(a, b):
 
     if a.shape != b.shape:
         raise Exception(f"Expecting inputs of the same shape, got {a.shape} and {b.shape}")
-
-    # TASK: Write implementation of Jaccard similarity coefficient. Please do not use 
-    # the Dice3D function from above to do the computation ;)
-    # <YOUR CODE GOES HERE>
-    a = (a > 0.1)
-    b = (b > 0.1)
-    intersection = np.sum(a*b)
-    volumes = np.sum(a) + np.sum(b) - intersection
-
-    if volumes == 0:
-        return 0
-
-    return float(intersection) / float(volumes)
+        
+    intersection = np.sum((a>0) * (b>0))
+    union = np.sum(((a>0) + (b>0))>0)
+    
+    if union == 0:
+        return -1
+    
+    return float(intersection) / float(union)

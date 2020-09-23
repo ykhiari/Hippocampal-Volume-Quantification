@@ -17,8 +17,6 @@ For this specific algorithm the performance was measured by using the following 
 In a real world the performance will be measured by a radioligist.  
 
 ## What data will the algorithm perform well in the real world and what data it might not perform well on?
-As per the results provided in the result file, the algorithm should perform fairly well the T2 MRI scan of the brain.
-However the algorithm might not perform well if the given 3D images has a non-uniform shape.
-There is also the fact that the algo has been trained on images Hippocampal Volumes between ~ 2500 and 4400.
-
+As per the results provided in the result file, the algorithm should perform fairly well in all MRI scan of the brain.
+The algorithm has no distinguish weaknesses.
 

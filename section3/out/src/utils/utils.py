@@ -13,10 +13,8 @@ mpl.use("agg")
 def mpl_image_grid(images):
     """
     Create an image grid from an array of images. Show up to 16 images in one figure
-
     Arguments:
         image {Torch tensor} -- NxWxH array of images
-
     Returns:
         Matplotlib figure
     """
@@ -48,7 +46,6 @@ def mpl_image_grid(images):
 
 def log_to_tensorboard(writer, loss, data, target, prediction_softmax, prediction, counter):
     """Logs data to Tensorboard
-
     Arguments:
         writer {SummaryWriter} -- PyTorch Tensorboard wrapper to use for logging
         loss {float} -- loss
@@ -72,7 +69,6 @@ def log_to_tensorboard(writer, loss, data, target, prediction_softmax, predictio
 def save_numpy_as_image(arr, path):
     """
     This saves image (2D array) as a file using matplotlib
-
     Arguments:
         arr {array} -- 2D array of pixels
         path {string} -- path to file
@@ -84,19 +80,15 @@ def med_reshape(image, new_shape):
     """
     This function reshapes 3D data to new dimension padding with zeros
     and leaving the content in the top-left corner
-
     Arguments:
         image {array} -- 3D array of pixel data
         new_shape {3-tuple} -- expected output shape
-
     Returns:
         3D array of desired shape, padded with zeroes
     """
 
     reshaped_image = np.zeros(new_shape)
-
-    # TASK: write your original image into the reshaped image
-    # <CODE GOES HERE>
-    reshaped_image[0:image.shape[0], 0:image.shape[1], 0:image.shape[2]] = image
+    x, y, z = image.shape
+    reshaped_image[:x, :y, :z] = image
 
     return reshaped_image
